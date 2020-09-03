@@ -1,6 +1,7 @@
 docker build -t fanmixco/complex-fibonacci-docker-edition-client:latest -t fanmixco/complex-fibonacci-docker-edition-client:$SHA -f ./client/Dockerfile ./client
 docker build -t fanmixco/complex-fibonacci-docker-edition-server:latest -t fanmixco/complex-fibonacci-docker-edition-server:$SHA -f ./server/Dockerfile ./server
 docker build -t fanmixco/complex-fibonacci-docker-edition-worker:latest -t fanmixco/complex-fibonacci-docker-edition-worker:$SHA -f ./worker/Dockerfile ./worker
+
 docker push fanmixco/complex-fibonacci-docker-edition-client:latest
 docker push fanmixco/complex-fibonacci-docker-edition-server:latest
 docker push fanmixco/complex-fibonacci-docker-edition-worker:latest
