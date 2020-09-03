@@ -1,0 +1,9 @@
+FROM node:alpine
+WORKDIR '/app'
+COPY ./package.json ./
+RUN npm install
+COPY . .
+CMD ["npm", "run", "start"]
+#docker build -f Dockerfile.dev .
+#-f is to specificify a specific Dockerfile to use
+#. is the current directory
