@@ -1,0 +1,37 @@
+apiVersion: skaffold/v1beta2
+kind: Config
+build:
+  #for local tests
+  local:
+    push: false
+  artifacts:
+    - image: fanmixco/complex-fibonacci-docker-edition-client
+      context: client
+      docker:
+        dockerfile: Dockerfile.dev
+      sync:
+        #mode 2 of injection in any other case is going to be rebuilt
+        # any change in the JS file should be updated in the container
+        '**/*.js': .
+        '**/*.css': .
+        '**/*.html': .
+    - image: fanmixco/complex-fibonacci-docker-edition-server
+      context: server
+      docker:
+        dockerfile: Dockerfile.dev
+      sync:
+        '**/*.js': .
+    - image: fanmixco/complex-fibonacci-docker-edition-worker
+      context: worker
+      docker:
+        dockerfile: Dockerfile.dev
+      sync:
+        '**/*.js': .
+deploy:
+  kubectl:
+    manifests:
+      - k8s/client-deployment.yaml
+      - k8s/server-deployment.yaml
+      - k8s/worker-deployment.yaml
+      - k8s/server-cluster-ip-service.yaml
+      - k8s/client-cluster-ip-service.yaml
