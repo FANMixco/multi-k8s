@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: supernovaic-com-tls
+spec:
+  secretName: supernovaic-com
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: supernovaic.com
+  dnsNames:
+    - supernovaic.com
+    - wwww.supernovaic.com
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - supernovaic.com
+          - www.supernovaic.com
